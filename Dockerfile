@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
+COPY ./certs/ap-south-1-bundle.pem ./certs/ap-south-1-bundle.pem
+
 # Install dependencies.
 RUN npm install
 
