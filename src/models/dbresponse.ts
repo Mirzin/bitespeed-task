@@ -1,10 +1,10 @@
 export interface DBResponse {
   id: number,
-  phoneNumber?: string,
+  phone_number?: string,
   email?: string,
-  linkedId?: number,
-  linkPrecedence: "primary" | "secondary",
-  createdAt: Date,
-  updatedAt: Date,
-  deletedAt?: Date
+  linked_id?: number,
+  link_precedence: "primary" | "secondary",
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date
 }

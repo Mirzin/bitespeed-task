@@ -7,13 +7,14 @@ interface validateResponse {
 }
 
 const validate = (request: ContactRequest): validateResponse => {
-  const email = request.email?.toString().trim();
-  const phoneNumber = request.phoneNumber?.toString().trim();
+  let email = request.email?.toString().trim();
+  let phoneNumber = request.phoneNumber?.toString().trim();
 
-  if (
-    (email === undefined || email.length == 0) &&
-    (phoneNumber === undefined || phoneNumber.length == 0)
-  ) {
+  if (email !== undefined && email.length === 0) email = undefined;
+  if (phoneNumber !== undefined && phoneNumber.length === 0)
+    phoneNumber = undefined;
+
+  if (email === undefined && phoneNumber === undefined) {
     return {
       isValid: false,
       message: "Either email or phone number is mandatory",
@@ -22,12 +23,12 @@ const validate = (request: ContactRequest): validateResponse => {
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email !== undefined && email.length != 0 && !emailRegex.test(email)) {
+  if (email !== undefined && !emailRegex.test(email)) {
     return { isValid: false, message: "Invalid Email", request };
   }
 
   const numberRegex = /^[0-9]+$/;
-  if (phoneNumber !== undefined && phoneNumber.length != 0 && !numberRegex.test(phoneNumber)) {
+  if (phoneNumber !== undefined && !numberRegex.test(phoneNumber)) {
     return { isValid: false, message: "Invalid PhoneNumber", request };
   }
 
